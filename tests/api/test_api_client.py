@@ -1,15 +1,10 @@
-from framework.clients.api_client import ApiClient
+def test_create_client(api_client):
 
+    assert api_client.base_url == "http://localhost:8080"
 
-def test_create_client():
-
-    client = ApiClient()
-
-    assert client.base_url == "http://localhost:8080"
-
-    assert client.session is not None
+    assert api_client.session is not None
 
     assert (
-        client.session.headers["Content-Type"]
+        api_client.session.headers["Content-Type"]
         == "application/json"
     )
