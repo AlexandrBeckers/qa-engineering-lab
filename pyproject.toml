@@ -12,8 +12,25 @@ requires-python = ">=3.14"
 packages = ["framework"]
 
 [tool.pytest.ini_options]
-pythonpath = ["."]
-testpaths = ["tests"]
+pythonpath = [
+    "."
+]
+
+testpaths = [
+    "tests"
+]
+
+python_files = [
+    "test_*.py"
+]
+
+python_functions = [
+    "test_*"
+]
+
+addopts = [
+    "-v"
+]
 
 [tool.ruff]
 line-length = 88
