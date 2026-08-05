@@ -1,4 +1,5 @@
 BASE_URL = "http://localhost:8080"
+REQUEST_TIMEOUT = 10
 
 DB_HOST = "localhost"
 DB_PORT = 5432

@@ -1,10 +1,13 @@
 import requests
+from requests import Response
 
-from framework.config.settings import BASE_URL
+from framework.config.settings import (
+    BASE_URL,
+    REQUEST_TIMEOUT,
+)
 
 
 class ApiClient:
-
     def __init__(self):
         self.base_url = BASE_URL
         self.session = requests.Session()
@@ -16,13 +19,18 @@ class ApiClient:
             }
         )
 
-    def _request(self, method: str, endpoint: str, **kwargs):
+    def _request(
+    self,
+    method: str,
+    endpoint: str,
+    **kwargs,
+) -> Response:
         url = f"{self.base_url}{endpoint}"
 
         response = self.session.request(
             method=method,
             url=url,
-            timeout=10,
+            timeout=REQUEST_TIMEOUT,
             **kwargs,
         )
 
