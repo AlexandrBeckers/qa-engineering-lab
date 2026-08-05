@@ -1,6 +1,11 @@
+from framework.endpoints.products import ProductEndpoints
+
+
 def test_get_products(api_client):
 
-    response = api_client.get("/api/products/")
+    response = api_client.get(
+        ProductEndpoints.LIST
+    )
 
     assert response.status_code == 200
 
