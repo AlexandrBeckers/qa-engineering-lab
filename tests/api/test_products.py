@@ -8,4 +8,5 @@ def test_get_products(api_client):
 
     assert "count" in data
     assert "results" in data
+    assert isinstance(data["count"], int)
     assert isinstance(data["results"], list)
