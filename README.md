@@ -2,7 +2,7 @@
 
 A personal engineering project for learning and practicing modern Quality Assurance Automation.
 
-The main goal of this repository is to build a production-like QA environment from scratch and gain hands-on experience with automation testing, infrastructure, CI/CD and engineering best practices.
+The main goal of this repository is to build a production-like QA Automation Framework from scratch and gain hands-on experience with automation testing, infrastructure, CI/CD and engineering best practices.
 
 ---
 
@@ -22,12 +22,11 @@ The main goal of this repository is to build a production-like QA environment fr
 
 ### Languages
 
-- Python
+- Python 3.14
 
 ### Testing
 
-- pytest
-- Playwright
+- Pytest
 - Requests
 
 ### API
@@ -38,24 +37,47 @@ The main goal of this repository is to build a production-like QA environment fr
 
 - PostgreSQL
 
-### Messaging
-
-- Apache Kafka
-- RabbitMQ
-
 ### Infrastructure
 
 - Docker
 - Docker Compose
 - Linux CLI
 
-### CI/CD
+### Code Quality
 
-- GitHub Actions
+- Ruff
 
-### Reporting
+### Version Control
 
-- Allure Report
+- Git
+- GitHub
+
+---
+
+## Current Implementation
+
+### API Automation
+
+- Reusable API Client based on `requests.Session`
+- Configurable request timeout
+- Default HTTP headers
+- Centralized API Endpoints layer
+- API Service layer
+- API smoke tests
+- Pytest fixtures for reusable test components
+
+### Framework Architecture
+
+- Layered project structure
+- Separation of API Client, Endpoints and API Services
+- Centralized project configuration
+- Reusable testing infrastructure
+
+### Development Workflow
+
+- Feature branches
+- Pull Request workflow
+- Dockerized backend for testing
 
 ---
 
@@ -64,30 +86,78 @@ The main goal of this repository is to build a production-like QA environment fr
 ```text
 qa-engineering-lab/
 │
-├── docs/
 ├── framework/
-├── infrastructure/
-├── resources/
-├── scripts/
+│   ├── api/
+│   ├── clients/
+│   ├── config/
+│   ├── endpoints/
+│   ├── pages/
+│   └── utils/
+│
 ├── tests/
+│   ├── api/
+│   ├── database/
+│   ├── messaging/
+│   ├── performance/
+│   └── ui/
+│
+├── external/
+│   └── ecommerce/
+│
+├── requirements.txt
+├── pyproject.toml
 └── README.md
 ```
 
 ---
 
-## Planned Features
+## Existing Tests
 
-- UI Automation
-- API Automation
-- Database Testing
-- Kafka Testing
-- RabbitMQ Testing
-- Docker Infrastructure
-- GitHub Actions
-- Allure Reporting
+Currently implemented:
+
+- API Client initialization
+- Configuration validation
+- Products API smoke test
+
+---
+
+## Running Tests
+
+Run all tests:
+
+```bash
+pytest
+```
+
+Run static analysis:
+
+```bash
+ruff check .
+```
+
+---
+
+## Roadmap
+
+- API response models (Pydantic)
+- Authentication layer
+- Database validation
+- Negative API testing
+- UI Automation (Playwright)
+- Kafka testing
+- RabbitMQ testing
+- Allure Reports
+- GitHub Actions CI/CD
 
 ---
 
 ## Project Status
 
-🚧 In active development.
+🚧 Actively developing a production-like QA Automation Framework.
+
+Current focus:
+
+- REST API automation
+- Framework architecture
+- Clean code
+- Test infrastructure
