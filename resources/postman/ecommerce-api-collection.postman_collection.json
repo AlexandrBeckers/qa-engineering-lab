@@ -1,0 +1,122 @@
+{
+  "info": {
+    "_postman_id": "ecommerce-local-collection",
+    "name": "Ecommerce API (local)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login (get JWT)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key":"Content-Type","value":"application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users/login/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api","users","login",""]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Save access token to environment variable 'jwtToken'",
+                  "if (pm.response.code === 200) {",
+                  "  var json = pm.response.json();",
+                  "  if (json.access) { pm.environment.set('jwtToken', json.access); }",
+                  "  if (json.refresh) { pm.environment.set('jwtRefresh', json.refresh); }",
+                  "}"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "List products",
+          "request": {
+            "method": "GET",
+            "header": [
+              {"key":"Authorization","value":"Bearer {{jwtToken}}","type":"text"}
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/products/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api","products",""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get product by slug",
+          "request": {
+            "method": "GET",
+            "header": [
+              {"key":"Authorization","value":"Bearer {{jwtToken}}","type":"text"}
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/products/{{productSlug}}/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api","products","{{productSlug}}",""]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key":"Content-Type","value":"application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users/register/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api","users","register",""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get current user (me)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {"key":"Authorization","value":"Bearer {{jwtToken}}","type":"text"}
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/me/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api","users","me",""]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
