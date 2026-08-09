@@ -1,1 +1,3 @@
-# Project dependencies will be added as the framework evolves.
+pytest>=8.3,<9.0
+requests>=2.32,<3.0
+ruff>=0.12,<1.0

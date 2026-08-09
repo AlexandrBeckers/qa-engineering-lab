@@ -1,93 +1,66 @@
 # QA Engineering Lab
 
-A personal engineering project for learning and practicing modern Quality Assurance Automation.
+Практический проект по автоматизации тестирования REST API на Python. Репозиторий показывает базовую архитектуру тестового фреймворка: отдельный API client, конфигурацию через environment variables, pytest fixtures, позитивные и негативные проверки и запуск в GitHub Actions.
 
-The main goal of this repository is to build a production-like QA environment from scratch and gain hands-on experience with automation testing, infrastructure, CI/CD and engineering best practices.
+## Что реализовано
 
----
+- REST API testing с `pytest` и `requests`;
+- переиспользуемый `ApiClient` с timeout и обработкой URL;
+- конфигурация через environment variables без credentials в коде;
+- параметризованные smoke-проверки;
+- позитивные и негативные сценарии для ресурса `/posts`;
+- автоматический запуск тестов и Ruff в GitHub Actions.
 
-## Goals
+Тестовым объектом по умолчанию служит публичный сервис [JSONPlaceholder](https://jsonplaceholder.typicode.com/). Он предназначен для учебных запросов: операции изменения данных эмулируются и не сохраняются на сервере.
 
-- Build a scalable QA Automation Framework
-- Learn UI, API and Database testing
-- Practice Message Broker testing (Kafka, RabbitMQ)
-- Work with Docker and Docker Compose
-- Configure CI/CD with GitHub Actions
-- Generate Allure Reports
-- Follow engineering best practices
-
----
-
-## Technology Stack
-
-### Languages
-
-- Python
-
-### Testing
-
-- pytest
-- Playwright
-- Requests
-
-### API
-
-- REST API
-
-### Databases
-
-- PostgreSQL
-
-### Messaging
-
-- Apache Kafka
-- RabbitMQ
-
-### Infrastructure
-
-- Docker
-- Docker Compose
-- Linux CLI
-
-### CI/CD
-
-- GitHub Actions
-
-### Reporting
-
-- Allure Report
-
----
-
-## Repository Structure
+## Структура
 
 ```text
 qa-engineering-lab/
-│
-├── docs/
+├── .github/workflows/quality.yml
 ├── framework/
-├── infrastructure/
-├── resources/
-├── scripts/
+│   ├── clients/api_client.py
+│   └── config/settings.py
 ├── tests/
-└── README.md
+│   ├── api/test_posts.py
+│   └── conftest.py
+├── .env.example
+├── pyproject.toml
+├── pytest.ini
+└── requirements.txt
 ```
 
----
+## Быстрый запуск
 
-## Planned Features
+```bash
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+pytest
+```
 
-- UI Automation
-- API Automation
-- Database Testing
-- Kafka Testing
-- RabbitMQ Testing
-- Docker Infrastructure
-- GitHub Actions
-- Allure Reporting
+Проверка стиля:
 
----
+```bash
+ruff check .
+```
 
-## Project Status
+## Конфигурация
 
-🚧 In active development.
+Значения по умолчанию подходят для запуска без секретов. При необходимости можно изменить endpoint:
+
+```bash
+export API_BASE_URL="https://jsonplaceholder.typicode.com"
+export API_TIMEOUT_SECONDS="10"
+pytest
+```
+
+Пример переменных находится в `.env.example`. Файл `.env` не должен попадать в Git.
+
+## Roadmap
+
+- schema validation;
+- Allure reporting;
+- PostgreSQL integration tests;
+- Kafka consumer/producer tests;
+- Docker Compose test environment.
