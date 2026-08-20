@@ -11,3 +11,8 @@ class ProductsApi:
         return self.api_client.get(
             ProductEndpoints.LIST
         )
+
+    def get_product(self, slug: str):
+        return self.api_client.get(
+            ProductEndpoints.DETAIL.format(slug=slug)
+        )
