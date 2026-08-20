@@ -1,3 +1,3 @@
 [submodule "external/ecommerce"]
 	path = external/ecommerce
-	url = git@github.com:AlexandrBeckers/ecommerce.git
+	url = https://github.com/AlexandrBeckers/ecommerce.git
